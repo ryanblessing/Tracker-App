@@ -4,7 +4,7 @@ VALUES
 (2, 'development');
 
 
-INSERT INTO roles(role_id, title, salary, department_id)
+INSERT INTO roles(roles_id, title, salary, department_id)
 VALUES
 (1, ' Sales Manager', '65', 1),
 (2, 'sales associate', '45', 1),
