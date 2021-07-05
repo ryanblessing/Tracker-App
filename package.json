@@ -1,0 +1,29 @@
+{
+  "name": "tracker",
+  "version": "1.0.0",
+  "description": "Command line app to manage a companies employees using Node, Inquirer and MySql",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "inquirer": "^8.1.1",
+    "mysql2": "^2.2.5"
+  },
+  "devDependencies": {
+    "jest": "^27.0.6"
+  },
+  "scripts": {
+    "test": "jest",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryanblessing/Tracker-App.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ryanblessing/Tracker-App/issues"
+  },
+  "homepage": "https://github.com/ryanblessing/Tracker-App#readme"
+}
