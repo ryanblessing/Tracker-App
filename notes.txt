@@ -1,0 +1,5 @@
+CONSTRAINT fk_deparment FOREIGN KEY(departments_id) REFERENCE departments(id)------roles
+
+CONSTRAINT fk_salary FOREIGN KEY(roles_salary) REFERENCE roles(salary)------manager
+
+CONSTRAINT fk_manager FOREIGN KEY(managers_id) REFERENCE managers(id)-----employee
