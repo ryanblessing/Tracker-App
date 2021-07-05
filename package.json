@@ -4,6 +4,7 @@
   "description": "Command line app to manage a companies employees using Node, Inquirer and MySql",
   "main": "server.js",
   "dependencies": {
+    "console.table": "^0.10.0",
     "express": "^4.17.1",
     "inquirer": "^8.1.1",
     "mysql2": "^2.2.5"
