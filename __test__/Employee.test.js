@@ -17,14 +17,14 @@ test('set first name', () => {
     const firstName = 'Ryan';
     const employee = new Employee('1', firstName, 'Blessing', 'employee')
 
-    expect(employee.getName()).toBe(firstName)
+    expect(employee.getFirstName()).toBe(firstName)
 });
 
 test('set last name', () => {
     const lastName = 'Blessing';
     const employee = new Employee('1', 'Ryan', lastName, 'employee')
 
-    expect(employee.getName()).toBe(lastName)
+    expect(employee.getLastName()).toBe(lastName)
 });
 
 
