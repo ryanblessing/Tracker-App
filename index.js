@@ -30,6 +30,9 @@ const userPrompt = {
                 case "Add Roles":
                     addRolesPrompt();
                     break;
+                case "Add Manager":
+                    addManagerPrompt();
+                    break;
                 case "Add Employee":
                     addEmployeePrompt();
                     break;
@@ -52,11 +55,11 @@ const departmentPrompt = {
 }
 
 //create prompt to Add roles
-const addRolePrompt = {
-        rolePrompt:() => {
+const addRolesPrompt = {
+        addRolePrompt:() => {
         return inquirer.prompt([{
             type: 'list',
-            name: 'role',
+            name: 'addRole',
             message: ' Please choose one of the roles!',
             choices: ['Sales Manager', 'sales associate', 'Development Manager', 'Development Engineer']
         },
@@ -74,14 +77,65 @@ const addRolePrompt = {
 
 //create comp to add managers
 const addManagerPrompt = {
-        managerPrompt: () => {
+        addManagerPrompt: () => {
         return inquirer.prompt([{
             type: 'input',
-            name: 'manager_id',
-            message: 'Please enter the Managers ID',
-            choices: ['1', '2', '3', '4']
-        }])
+            name: 'managerId',
+            message: 'Please enter the Managers ID'
+        },
+        {
+            type: 'input',
+            name: 'firstName',
+            message: 'What is the persons first name?'
+
+        },
+        {
+            type: 'input',
+            name: 'lastName',
+            message: 'What is the persons last name?'
+        },
+        {   
+            type: 'input',
+            name: 'roleId',
+            message: 'What is the role Id number?',
+            choices: ['1-Sales Manager', '3-Development Manager']
+        }
+        ])
     }
+},
+
+const addEmployeePrompt = {
+    addEmployeePrompt: () => {
+    return inquirer.prompt([{
+        type: 'input',
+        name: 'employeeId',
+        message: 'Please enter the employees ID'
+    },
+    {
+        type: 'input',
+        name: 'firstName',
+        message: 'What is the persons first name?'
+
+    },
+    {
+        type: 'input',
+        name: 'lastName',
+        message: 'What is the persons last name?'
+    },
+    {   
+        type: 'input',
+        name: 'roleId',
+        message: 'What is the role Id number?',
+        choices: ['2-Sales Associate', '4-Development Engineer']
+    },
+    {
+        type: 'input',
+        name: 'managerId',
+        Message: 'What is the employees, Managers Id?',
+        choices: ['Sales Manager', 'Development Manager']
+    }
+    ])
+}
 }
 
 

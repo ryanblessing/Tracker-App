@@ -6,7 +6,7 @@ const db= mysql.createConnection({
     database: 'tracker',
     password: 'password89'
 },
-console.log('Ypu connected to the tracker database!')
+console.log('Your connected to the tracker database!')
 );
 
 module.exports = db;
