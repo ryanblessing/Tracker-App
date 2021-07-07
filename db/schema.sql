@@ -15,16 +15,12 @@ CREATE TABLE roles(
     department_id INTEGER
 );
 
-CREATE TABLE managers(
-    id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(30) NOT NULL,
-    last_name VARCHAR(30) NOT NULL,
-    roles_id INTEGER
-);
+
 
 CREATE TABLE employees(
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
-    roles_id INTEGER
+    roles_id INTEGER NOT NULL,
+    manager_id INTEGER(4)
 );

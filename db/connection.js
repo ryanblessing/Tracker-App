@@ -1,7 +1,12 @@
 const mysql = require('mysql2');
-//pool manages multiple connections if need be
-const pool = mysql.createPool({
+
+const db= mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    database: 'tracker'
-});
+    database: 'tracker',
+    password: 'password89'
+},
+console.log('Ypu connected to the tracker database!')
+);
+
+module.exports = db;
