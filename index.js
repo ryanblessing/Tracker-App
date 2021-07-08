@@ -1,11 +1,13 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const cTable = require('console.table');
-const { dbUser } = require('inquirer');
+const dbData = require('./db/connection.js');
+const { request } = require('http');
 
-const userPrompt = {
-    userPrompt: () => {
-        return inquirer.prompt([{
+
+
+function userPrompt() {
+    return inquirer.prompt([{
             type: 'list',
             name: 'menu',
             message: 'Please choose one of the following options!',
@@ -14,12 +16,12 @@ const userPrompt = {
         .then((answer) => {
             switch (answer.menu) {
                 case "View All departments":
-                    console.log(viewDepartments);
+                    Departments();
                     break;
                 case "View Roles":
-                    console.log(viewRoles);
+                    roles();
                     break;
-                    case "View Managers":
+                case "View Managers":
                     console.log(viewManagers);
                     break;
                 case "View Employees":
@@ -39,21 +41,27 @@ const userPrompt = {
                     break;
             }
         });
-    }
 }
 
 //create table to view all departments
-const viewDepartments = cTable.getTable([
-    {
-        id: '1',
-        name: 'sales'
-    }, 
-    {
-        id: '2',
-        name: 'Development'
-    }
-])
+function Departments(){
+const viewDepartments = [
+    ['Sales', 1],
+    ['Development', 2]
+];
+console.table(['Departments', 'Id'], viewDepartments);
+return userPrompt();
+}
 
+// const viewDepartments = console.table([
+//     {
+//         department: 'sales',
+//         id: '1'
+//     }, {
+//         department: 'Development',
+//         id: '2'
+//     }  
+// ]);
 //create table to view all roles
 // const viewRoles = cTable.getTable([
 //     {
@@ -63,31 +71,41 @@ const viewDepartments = cTable.getTable([
 //     }
 // ])
 
+function roles(){
+    let viewRoles = cTable([
+        {
+            roles: request.params.id,
+            title: request.params.title,
+            salary: request.params.salary,
+            departmentId: request.params.id
+        }
+    ])
+    console.table(['Roles', 'Title', 'Salary', 'Department Id'], viewRoles);
+    return userPrompt();
+    }
+
 //create prompt to Add roles
-const addRolesPrompt = {
-        addRolePrompt:() => {
-        return inquirer.prompt([{
+function addRolesPrompt() {
+    return inquirer.prompt([{
             type: 'list',
             name: 'addRole',
             message: ' Please choose one of the roles!',
             choices: ['Sales Manager', 'sales associate', 'Development Manager', 'Development Engineer']
         },
         {
-             name: 'salary',
-             message: 'Enter the salary for this role'
+            name: 'salary',
+            message: 'Enter the salary for this role'
         },
         {
             name: 'department_id',
             message: 'What department does this employee belong to?'
         }
-        ])
-    }
+    ])
 }
 
 //create comp to add managers
-const addManagerPrompt = {
-        addManagerPrompt: () => {
-        return inquirer.prompt([{
+function addManagerPrompt() {
+    return inquirer.prompt([{
             type: 'input',
             name: 'managerId',
             message: 'Please enter the Managers ID'
@@ -103,50 +121,48 @@ const addManagerPrompt = {
             name: 'lastName',
             message: 'What is the persons last name?'
         },
-        {   
+        {
             type: 'input',
             name: 'roleId',
             message: 'What is the role Id number?',
             choices: ['1-Sales Manager', '3-Development Manager']
         }
-        ])
-    }
-}
-
-const addEmployeePrompt = {
-    addEmployeePrompt: () => {
-    return inquirer.prompt([{
-        type: 'input',
-        name: 'employeeId',
-        message: 'Please enter the employees ID'
-    },
-    {
-        type: 'input',
-        name: 'firstName',
-        message: 'What is the persons first name?'
-
-    },
-    {
-        type: 'input',
-        name: 'lastName',
-        message: 'What is the persons last name?'
-    },
-    {   
-        type: 'input',
-        name: 'roleId',
-        message: 'What is the role Id number?',
-        choices: ['2-Sales Associate', '4-Development Engineer']
-    },
-    {
-        type: 'input',
-        name: 'managerId',
-        Message: 'What is the employees, Managers Id?',
-        choices: ['Sales Manager', 'Development Manager']
-    }
     ])
 }
+
+function addEmployeePrompt() {
+
+    return inquirer.prompt([{
+            type: 'input',
+            name: 'employeeId',
+            message: 'Please enter the employees ID'
+        },
+        {
+            type: 'input',
+            name: 'firstName',
+            message: 'What is the persons first name?'
+
+        },
+        {
+            type: 'input',
+            name: 'lastName',
+            message: 'What is the persons last name?'
+        },
+        {
+            type: 'input',
+            name: 'roleId',
+            message: 'What is the role Id number?',
+            choices: ['2-Sales Associate', '4-Development Engineer']
+        },
+        {
+            type: 'input',
+            name: 'managerId',
+            Message: 'What is the employees, Managers Id?',
+            choices: ['Sales Manager', 'Development Manager']
+        }
+    ])
 }
 
-module.exports = { userPrompt, viewDepartments, viewRoles,
-    viewManagers, viewEmployees, addRolesPrompt, addManagerPrompt, addEmployeePrompt,
-updatePrompt};
+userPrompt();
+
+

@@ -11,21 +11,17 @@ CREATE TABLE departments(
 CREATE TABLE roles(
     roles_id INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL,
     title VARCHAR(30) NOT NULL,
-    salary DECIMAL(65,1) NOT NULL,
-    department_id INTEGER
+    salary DECIMAL(65,1) NOT NULL
 );
 
 CREATE TABLE managers(
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(30) NOT NULL,
-    last_name VARCHAR(30) NOT NULL,
-    roles_id INTEGER NOT NULL,
+    last_name VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE employees(
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(30) NOT NULL,
-    last_name VARCHAR(30) NOT NULL,
-    roles_id INTEGER NOT NULL,
-    manager_id INTEGER(4)
+    last_name VARCHAR(30) NOT NULL
 );
