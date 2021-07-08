@@ -3,9 +3,6 @@ const fs = require('fs');
 const cTable = require('console.table');
 const dbData = require('./db/connection.js');
 
-
-
-
 function userPrompt() {
     return inquirer.prompt([{
             type: 'list',
@@ -55,16 +52,31 @@ return userPrompt();
 
 
 function roles(){
-    let viewRoles = cTable([
-        {
-            roles: (dbData).params.id,
-            title: (dbData).params.title,
-            salary: (dbData).params.salary,
-            departmentId: (dbData).params.department_id
-        }
-    ])
-    console.table(['Roles', 'Title', 'Salary', 'Department Id'], viewRoles);
-    return userPrompt();
+    // Get Data - Query DB
+    dbData.query(`SELECT * FROM roles`, (err, result) => {
+        if (err) throw err;
+        // Display Data
+        console.log(result)
+        // make sure you can log result first
+        //add a 4 loop or for each to get through all the info
+        //read more about the queries on Mysql
+        result.forEach(row => {
+            console.log(row)
+        })
+
+        // let viewRoles = cTable([
+        //     {
+        //         roles: (dbData).params.id,
+        //         title: (dbData).params.title,
+        //         salary: (dbData).params.salary,
+        //         departmentId: (dbData).params.department_id
+        //     }
+        // ])
+        // console.table(['Roles', 'Title', 'Salary', 'Department Id'], viewRoles);
+        return userPrompt();
+    })
+
+
     }
 
 //create prompt to Add roles

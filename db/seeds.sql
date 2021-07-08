@@ -13,10 +13,10 @@ VALUES
 
 INSERT INTO employees(first_name, last_name, role_id, manager_id)
 VALUES
-('Rick', 'James', 1),
-('Kevin', 'Spacey', 1),
-('Wayne', 'Gretzkey', 3),
-('Kid', 'Rock', 3),
+('Rick', 'James', 1, NULL),
+('Kevin', 'Spacey', 1, NULL),
+('Wayne', 'Gretzkey', 3, NULL),
+('Kid', 'Rock', 3, NULL),
 ('Patrick', 'Swayze', 2, 1),
 ('Jim', 'Carey', 2, 1),
 ('Brett', 'Farve', 2, 2),
