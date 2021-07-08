@@ -1,6 +1,6 @@
 const mysql = require('mysql2');
 
-const db= mysql.createConnection({
+const dbData= mysql.createConnection({
     host: 'localhost',
     user: 'root',
     database: 'tracker',
@@ -9,10 +9,10 @@ const db= mysql.createConnection({
 console.log('Your connected to the tracker database!')
 );
 
-db.connect(function (err) {
-    if(err) throw errq
+dbData.connect(function (err) {
+    if(err) throw err
 });
 
 
 
-module.exports = db;
+module.exports = dbData;
