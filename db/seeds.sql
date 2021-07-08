@@ -1,24 +1,22 @@
-INSERT INTO departments(id, name)
+INSERT INTO departments(department_name)
 VALUES
-(1, 'Sales'),
-(2, 'Development');
+('Sales'),
+('Development');
 
-INSERT INTO roles( title, salary, departments_id)
+INSERT INTO roles(title, salary, department_id)
 VALUES
 ('Sales Manager', '65', 1),
 ('sales associate', '45', 1),
 ('Development Manager', '65', 2),
 ('Development Engineer', '60', 2);
 
-INSERT INTO managers(first_name, last_name, roles_id)
+
+INSERT INTO employees(first_name, last_name, role_id, manager_id)
 VALUES
 ('Rick', 'James', 1),
 ('Kevin', 'Spacey', 1),
 ('Wayne', 'Gretzkey', 3),
-('Kid', 'Rock', 3);
-
-INSERT INTO employees(first_name, last_name, roles_id, managers_id)
-VALUES
+('Kid', 'Rock', 3),
 ('Patrick', 'Swayze', 2, 1),
 ('Jim', 'Carey', 2, 1),
 ('Brett', 'Farve', 2, 2),
@@ -27,3 +25,5 @@ VALUES
 ('Connor', 'Mcgregor', 4, 3),
 ('Joe', 'Rogan', 4, 4),
 ('Tim', 'Scott', 4, 4);
+
+

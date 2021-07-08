@@ -2,7 +2,7 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const cTable = require('console.table');
 const dbData = require('./db/connection.js');
-const { request } = require('http');
+
 
 
 
@@ -53,31 +53,14 @@ console.table(['Departments', 'Id'], viewDepartments);
 return userPrompt();
 }
 
-// const viewDepartments = console.table([
-//     {
-//         department: 'sales',
-//         id: '1'
-//     }, {
-//         department: 'Development',
-//         id: '2'
-//     }  
-// ]);
-//create table to view all roles
-// const viewRoles = cTable.getTable([
-//     {
-//         id: request.params.id,
-//         title: request.params.title,
-//         salary: request.params.salary
-//     }
-// ])
 
 function roles(){
     let viewRoles = cTable([
         {
-            roles: request.params.id,
-            title: request.params.title,
-            salary: request.params.salary,
-            departmentId: request.params.id
+            roles: (dbData).params.id,
+            title: (dbData).params.title,
+            salary: (dbData).params.salary,
+            departmentId: (dbData).params.department_id
         }
     ])
     console.table(['Roles', 'Title', 'Salary', 'Department Id'], viewRoles);
@@ -162,7 +145,6 @@ function addEmployeePrompt() {
         }
     ])
 }
-
 userPrompt();
 
 
