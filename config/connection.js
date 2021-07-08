@@ -9,4 +9,10 @@ const db= mysql.createConnection({
 console.log('Your connected to the tracker database!')
 );
 
+db.connect(function (err) {
+    if(err) throw errq
+});
+
+
+
 module.exports = db;

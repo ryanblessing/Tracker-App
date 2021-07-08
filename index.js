@@ -1,9 +1,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const Employee = require('./lib/employee');
-const Manager = require('./lib/manager');
-
-const employeeArray = [];
+const cTable = require('console.table');
+const { dbUser } = require('inquirer');
 
 const userPrompt = {
     userPrompt: () => {
@@ -16,16 +14,16 @@ const userPrompt = {
         .then((answer) => {
             switch (answer.menu) {
                 case "View All departments":
-                    departmentPrompt();
+                    console.log(viewDepartments);
                     break;
                 case "View Roles":
-                    rolePrompt();
+                    console.log(viewRoles);
+                    break;
+                    case "View Managers":
+                    console.log(viewManagers);
                     break;
                 case "View Employees":
-                    employeePrompt();
-                    break;
-                case "Add Departments":
-                    addDeparmentPrompt();
+                    console.log(viewEmployees);
                     break;
                 case "Add Roles":
                     addRolesPrompt();
@@ -44,15 +42,26 @@ const userPrompt = {
     }
 }
 
-//create prompt to view all departments
-const departmentPrompt = {
-    departmentPrompt:() => {
-        return inquirer.prompt([{
-            type: 'list',
-            name: 'department',
-        }])
+//create table to view all departments
+const viewDepartments = cTable.getTable([
+    {
+        id: '1',
+        name: 'sales'
+    }, 
+    {
+        id: '2',
+        name: 'Development'
     }
-}
+])
+
+//create table to view all roles
+// const viewRoles = cTable.getTable([
+//     {
+//         id: request.params.id,
+//         title: request.params.title,
+//         salary: request.params.salary
+//     }
+// ])
 
 //create prompt to Add roles
 const addRolesPrompt = {
@@ -73,7 +82,7 @@ const addRolesPrompt = {
         }
         ])
     }
-},
+}
 
 //create comp to add managers
 const addManagerPrompt = {
@@ -102,7 +111,7 @@ const addManagerPrompt = {
         }
         ])
     }
-},
+}
 
 const addEmployeePrompt = {
     addEmployeePrompt: () => {
@@ -138,6 +147,6 @@ const addEmployeePrompt = {
 }
 }
 
-
-
-module.exports = userPrompt;
+module.exports = { userPrompt, viewDepartments, viewRoles,
+    viewManagers, viewEmployees, addRolesPrompt, addManagerPrompt, addEmployeePrompt,
+updatePrompt};

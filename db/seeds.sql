@@ -6,17 +6,17 @@ VALUES
 
 INSERT INTO roles(roles_id, title, salary, department_id)
 VALUES
-(1, 'Sales Manager', '65', 1),
-(2, 'sales associate', '45', 1),
-(3, 'Development Manager', '65', 2),
-(4, 'Development Engineer', '60', 2);
+('Sales Manager', '65', 1),
+('sales associate', '45', 1),
+('Development Manager', '65', 2),
+('Development Engineer', '60', 2);
 
 INSERT INTO managers( manager_id, first_name, last_name, roles_id)
 VALUES
-(1, 'Rick', 'James', 1),
-(2, 'Kevin', 'Spacey', 1),
-(3, 'Wayne', 'Gretzkey', 3),
-(4, 'Kid', 'Rock', 3);
+('Rick', 'James', 1),
+('Kevin', 'Spacey', 1),
+('Wayne', 'Gretzkey', 3),
+('Kid', 'Rock', 3);
 
 INSERT INTO employees(first_name, last_name, roles_id, manager_id)
 VALUES
