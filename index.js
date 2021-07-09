@@ -1,34 +1,30 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const cTable = require('console.table');
 const dbData = require('./db/connection.js');
+
+
+
 
 function userPrompt() {
     return inquirer.prompt([{
             type: 'list',
             name: 'menu',
             message: 'Please choose one of the following options!',
-            choices: ["View All departments", "View Roles", "View Employees", "Add Departments", "Add Roles", "Add Employee", "Update Employee"]
+            choices: ["View All Departments", "View Roles", "View Employees", "Add Departments", "Add Roles", "Add Employee", "Update Employee"]
         }])
         .then((answer) => {
             switch (answer.menu) {
-                case "View All departments":
-                    Departments();
+                case "View All Departments":
+                    departments();
                     break;
                 case "View Roles":
                     roles();
                     break;
-                case "View Managers":
-                    console.log(viewManagers);
-                    break;
                 case "View Employees":
-                    console.log(viewEmployees);
+                    employees();
                     break;
                 case "Add Roles":
                     addRolesPrompt();
-                    break;
-                case "Add Manager":
-                    addManagerPrompt();
                     break;
                 case "Add Employee":
                     addEmployeePrompt();
@@ -41,43 +37,44 @@ function userPrompt() {
 }
 
 //create table to view all departments
-function Departments(){
-const viewDepartments = [
-    ['Sales', 1],
-    ['Development', 2]
-];
-console.table(['Departments', 'Id'], viewDepartments);
-return userPrompt();
+function departments() {
+    // Get Data - Query DB
+    dbData.query(`SELECT * FROM departments ORDER BY id`, (err, result) => {
+        if (err) throw err;
+        // Display Data
+        result.forEach(row => {
+            console.table(row)
+        })
+        return userPrompt();
+    })
 }
 
 
-function roles(){
+function roles() {
     // Get Data - Query DB
-    dbData.query(`SELECT * FROM roles`, (err, result) => {
+    dbData.query(`SELECT * FROM roles ORDER BY id`, (err, result) => {
         if (err) throw err;
         // Display Data
-        console.log(result)
-        // make sure you can log result first
-        //add a 4 loop or for each to get through all the info
-        //read more about the queries on Mysql
         result.forEach(row => {
-            console.log(row)
+            console.table(row)
         })
+        return userPrompt();
+    })
+}
 
-        // let viewRoles = cTable([
-        //     {
-        //         roles: (dbData).params.id,
-        //         title: (dbData).params.title,
-        //         salary: (dbData).params.salary,
-        //         departmentId: (dbData).params.department_id
-        //     }
-        // ])
-        // console.table(['Roles', 'Title', 'Salary', 'Department Id'], viewRoles);
+//function to see employees
+function employees() {
+    dbData.query(`SELECT * FROM employees ORDER BY id`, (err, result) => {
+        if (err) throw err;
+        // Display Data
+        result.forEach(row => {
+            console.table(row)
+        })
         return userPrompt();
     })
 
+}
 
-    }
 
 //create prompt to Add roles
 function addRolesPrompt() {
@@ -95,34 +92,7 @@ function addRolesPrompt() {
             name: 'department_id',
             message: 'What department does this employee belong to?'
         }
-    ])
-}
-
-//create comp to add managers
-function addManagerPrompt() {
-    return inquirer.prompt([{
-            type: 'input',
-            name: 'managerId',
-            message: 'Please enter the Managers ID'
-        },
-        {
-            type: 'input',
-            name: 'firstName',
-            message: 'What is the persons first name?'
-
-        },
-        {
-            type: 'input',
-            name: 'lastName',
-            message: 'What is the persons last name?'
-        },
-        {
-            type: 'input',
-            name: 'roleId',
-            message: 'What is the role Id number?',
-            choices: ['1-Sales Manager', '3-Development Manager']
-        }
-    ])
+    ]) //.then()
 }
 
 function addEmployeePrompt() {
@@ -158,5 +128,3 @@ function addEmployeePrompt() {
     ])
 }
 userPrompt();
-
-
