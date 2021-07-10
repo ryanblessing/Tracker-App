@@ -11,6 +11,7 @@ VALUES
 ('Development Engineer', '60', 2);
 
 
+
 INSERT INTO employees(first_name, last_name, role_id, manager_id)
 VALUES
 ('Rick', 'James', 1, NULL),
