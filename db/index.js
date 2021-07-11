@@ -7,7 +7,7 @@ class DataBase {
     seeAllEmployees() {
         return this.connection.promise().query(`SELECT 
      
-        employees.id, employees.first_name, employees.last_name, roles.title AS job_title, departments.name AS departments, roles.salary
+        employees.id, employees.first_name, employees.last_name, employees.role_id  AS job_title, department_name AS department, roles.salary
         
         FROM employees
         
@@ -20,6 +20,7 @@ class DataBase {
      seeAllRoles(){
         return this.connection.promise().query(`SELECT * FROM roles`)
      }  
+
      
      seeAllDepartments(){
         return this.connection.promise().query(`SELECT * FROM departments`)
@@ -27,8 +28,10 @@ class DataBase {
     
 
     createDepartment(departments) {
-        return this.connection.promise().query(`INSERT INTO departments SET ?`, departments)
+        return this.connection.promise().query(`INSERT INTO departments(name) VALUES (?)`, departments)
     }
+
+
     createNewRole(roles){
         return this.connection.promise().query(`INSERT INTO roles SET ?`, roles)
     }

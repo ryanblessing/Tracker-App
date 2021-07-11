@@ -1,7 +1,11 @@
-const { prompt } = require('inquirer');
+const {
+    prompt
+} = require('inquirer');
 const fs = require('fs');
 const db = require('./db/index.js');
-const { table } = require('console');
+const {
+    table
+} = require('console');
 
 function userPrompt() {
     prompt([{
@@ -48,24 +52,25 @@ function addDepartmentsPrompt() {
     }]).then((answer) => {
         switch (answer.addDepartment) {
             case 'Yes':
-                addNewDepartment();
+                newDepartment();
                 break;
             case 'No':
-                 userPrompt();
-                 break;
+                userPrompt();
+                break;
         }
     })
 }
 //function to create new department
-function addNewDepartment() {
+function newDepartment() {
     prompt([{
         name: 'name',
         message: 'Please enter the name of your new department.'
     }]).then(res => {
         let name = res
-        db.createDepartment(name)
+        console.log(res)
+        db.createDepartment()
             .then(() => console.log(`added ${name.name} to the db`))
-            .then(() => userQuestions())
+            .then(() => userPrompt())
     })
 }
 
@@ -88,7 +93,28 @@ function addRolesPrompt() {
             message: 'What department does this employee belong to?',
             choices: ['Sales', 'Development']
         }
-    ])
+    ]).then((answer) => {
+        switch (answer.addRolesPrompt) {
+            case 'Yes':
+                newRoles();
+                break;
+            case 'No':
+                userPrompt();
+                break;
+        }
+    })
+}
+
+function newRoles() {
+    prompt([{
+        name: 'name',
+        message: 'Please enter the name of your new Role.'
+    }]).then(res => {
+        let name = res
+        db.createNewEmployee()
+            .then(() => console.log(`added ${name.name} to the db`))
+            .then(() => userPrompt())
+    })
 }
 
 // prompts to create employees
@@ -130,32 +156,35 @@ function addEmployeePrompt() {
 //function to see employees
 function viewEmployees() {
     db.seeAllEmployees()
-    .then(([rows]) => {
-        let employees = rows
-        console.log("\n")
-        console.table(employees)
-    })
-    .then(() => userPrompt())
+        .then(([rows]) => {
+            let employees = rows
+            console.log("\n")
+            console.table(employees)
+        })
+        .then(() => userPrompt())
 }
 
+
+//see roles
 function roles() {
     db.seeAllRoles()
-    .then(([rows]) => {
-        let roles = rows
-        console.log('\n')
-        console.table(roles)
-    })
-    .then(() => userPrompt()) 
+        .then(([rows]) => {
+            let roles = rows
+            console.log('\n')
+            console.table(roles)
+        })
+        .then(() => userPrompt())
 };
 
+//see departments
 function departments() {
     db.seeAllDepartments()
-    .then(([rows]) => {
-        let departments = rows
-        console.log('\n')
-        console.table(departments)
-    })
-    .then(() => userPrompt()) 
+        .then(([rows]) => {
+            let departments = rows
+            console.log('\n')
+            console.table(departments)
+        })
+        .then(() => userPrompt())
 };
 
 userPrompt();
